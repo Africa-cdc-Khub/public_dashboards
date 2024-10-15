@@ -137,7 +137,7 @@
 						<?php else: ?>
 
 							<li>
-								<a href="<?php echo base_url(uri: 'account/logout'); ?>" class="ft-medium">
+								<a href="<?php echo base_url('account/logout'); ?>" class="ft-medium">
 									Logout
 								</a>
 							</li>
