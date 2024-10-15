@@ -22,7 +22,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN a2enmod rewrite
 
 # Set working directory
-WORKDIR /var/www/html
+WORKDIR /var/www/tools.africacdc.org/tools/public_dashboards
+
+# Set the Apache document root to the correct directory
+RUN sed -i 's|/var/www/html|/var/www/tools.africacdc.org/tools/public_dashboards|g' /etc/apache2/sites-available/000-default.conf
 
 # Expose port 8080
 EXPOSE 8080
