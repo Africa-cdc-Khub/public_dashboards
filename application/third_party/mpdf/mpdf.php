@@ -1798,14 +1798,11 @@ function Close() {
 }
 
 /*-- BACKGROUNDS --*/
-function _resizeBackgroundImage($imw, $imh, $cw, $ch, $resize, $repx, $repy, $pba=array(), $size=array()) {
+function _resizeBackgroundImage($imw, $imh, $cw, $ch, $resize=0, $repx, $repy, $pba=array(), $size=array()) {
 	// pba is background positioning area (from CSS background-origin) may not always be set [x,y,w,h]
 	// size is from CSS3 background-size - takes precendence over old resize 
 	//	$w - absolute length or % or auto or cover | contain
 	//	$h - absolute length or % or auto or cover | contain
-		if (empty($resize)) {
-			$resize = 0;
-		}
 	if (isset($pba['w'])) $cw = $pba['w'];
 	if (isset($pba['h'])) $ch = $pba['h'];
 
@@ -1981,11 +1978,11 @@ function PrintBodyBackgrounds() {
 
 	if ($this->bodyBackgroundColor) {
 		$s .= 'q ' .$this->SetFColor($this->bodyBackgroundColor, true)."\n";
-		if ($this->bodyBackgroundColor[0]==5) {	// RGBa
-			$s .= $this->SetAlpha(ord($this->bodyBackgroundColor[4])/100, 'Normal', true, 'F')."\n";
+		if ($this->bodyBackgroundColor{0}==5) {	// RGBa
+			$s .= $this->SetAlpha(ord($this->bodyBackgroundColor{4})/100, 'Normal', true, 'F')."\n";
 		}
-		else if ($this->bodyBackgroundColor[0]==6) {	// CMYKa
-			$s .= $this->SetAlpha(ord($this->bodyBackgroundColor[5])/100, 'Normal', true, 'F')."\n";
+		else if ($this->bodyBackgroundColor{0}==6) {	// CMYKa
+			$s .= $this->SetAlpha(ord($this->bodyBackgroundColor{5})/100, 'Normal', true, 'F')."\n";
 		}
 		$s .= sprintf('%.3F %.3F %.3F %.3F re f Q', ($clx*_MPDFK), ($cly*_MPDFK),$clw*_MPDFK,$clh*_MPDFK)."\n";
 	}
@@ -2055,11 +2052,11 @@ function PrintPageBackgrounds($adjustmenty=0) {
 			if (isset($pb['shadow']) && $pb['shadow']) { $s .= $pb['shadow']."\n"; }
 			if (isset($pb['clippath']) && $pb['clippath']) { $s .= $pb['clippath']."\n"; }
 			$s .= 'q '.$this->SetFColor($pb['col'], true)."\n";
-			if ($pb['col'][0]==5) {	// RGBa
-				$s .= $this->SetAlpha(ord($pb['col'][4])/100, 'Normal', true, 'F')."\n"; 
+			if ($pb['col']{0}==5) {	// RGBa
+				$s .= $this->SetAlpha(ord($pb['col']{4})/100, 'Normal', true, 'F')."\n"; 
 			}
-			else if ($pb['col'][0]==6) {	// CMYKa
-				$s .= $this->SetAlpha(ord($pb['col'][5])/100, 'Normal', true, 'F')."\n";
+			else if ($pb['col']{0}==6) {	// CMYKa
+				$s .= $this->SetAlpha(ord($pb['col']{5})/100, 'Normal', true, 'F')."\n";
 			}
 			$s .= sprintf('%.3F %.3F %.3F %.3F re f Q',$pb['x']*_MPDFK,($this->h-$pb['y'])*_MPDFK,$pb['w']*_MPDFK,-$pb['h']*_MPDFK)."\n";
 			if (isset($pb['clippath']) && $pb['clippath']) { $s .= 'Q'."\n"; }
@@ -2237,11 +2234,11 @@ function PrintTableBackgrounds($adjustmenty=0) {
 		foreach ($pbs AS $pb) {
 	 	 if ((!isset($pb['gradient']) || !$pb['gradient']) && (!isset($pb['image_id']) || !$pb['image_id'])) {
 			$s .= 'q '.$this->SetFColor($pb['col'], true)."\n";
-			if ($pb['col'][0]==5) {	// RGBa
-				$s .= $this->SetAlpha(ord($pb['col'][4])/100, 'Normal', true, 'F')."\n"; 
+			if ($pb['col']{0}==5) {	// RGBa
+				$s .= $this->SetAlpha(ord($pb['col']{4})/100, 'Normal', true, 'F')."\n"; 
 			}
-			else if ($pb['col'][0]==6) {	// CMYKa
-				$s .= $this->SetAlpha(ord($pb['col'][5])/100, 'Normal', true, 'F')."\n";
+			else if ($pb['col']{0}==6) {	// CMYKa
+				$s .= $this->SetAlpha(ord($pb['col']{5})/100, 'Normal', true, 'F')."\n";
 			}
 			$s .= sprintf('%.3F %.3F %.3F %.3F re %s Q',$pb['x']*_MPDFK,($this->h-$pb['y'])*_MPDFK,$pb['w']*_MPDFK,-$pb['h']*_MPDFK,'f')."\n";
 		  }
@@ -2855,16 +2852,16 @@ function AddSpotColor($name, $c, $m, $y, $k) {
 function SetColor($col, $type='') {
 	$out = '';
 	if (!$col) { return ''; }	// mPDF 6
-	if ($col[0]==3 || $col[0]==5) {	// RGB / RGBa
+	if ($col{0}==3 || $col{0}==5) {	// RGB / RGBa
 		$out = sprintf('%.3F %.3F %.3F rg',ord($col{1})/255,ord($col{2})/255,ord($col{3})/255);
 	}
-	else if ($col[0]==1) {	// GRAYSCALE
+	else if ($col{0}==1) {	// GRAYSCALE
 		$out = sprintf('%.3F g',ord($col{1})/255);
 	}
-	else if ($col[0]==2) {	// SPOT COLOR
+	else if ($col{0}==2) {	// SPOT COLOR
 		$out = sprintf('/CS%d cs %.3F scn',ord($col{1}),ord($col{2})/100);
 	}
-	else if ($col[0]==4 || $col[0]==6) {	// CMYK / CMYKa
+	else if ($col{0}==4 || $col{0}==6) {	// CMYK / CMYKa
 		$out = sprintf('%.3F %.3F %.3F %.3F k', ord($col{1})/100, ord($col{2})/100, ord($col{3})/100, ord($col{4})/100);
 	}
 	if ($type=='Draw') { $out = strtoupper($out); }	// e.g. rg => RG
@@ -3974,7 +3971,7 @@ function GetJspacing($nc,$ns,$w,$inclCursive,&$cOTLdata) {
 		for($c=0;$c<count($cOTLdata);$c++) {
 			for($i=0;$i<strlen($cOTLdata[$c]['group']);$i++) {
 
-				if ($cOTLdata[$c]['group'][$i]=='S') {
+				if ($cOTLdata[$c]['group']{$i}=='S') {
 					// Save from last word
 					if ($max_kashida_in_word) { 
 						$k_ctr++; 
@@ -4595,14 +4592,14 @@ function Cell($w,$h=0,$txt='',$border=0,$ln=0,$align='',$fill=0,$link='', $curre
 			foreach($this->textshadow AS $ts) {
 					$s .= ' q ';
 					$s .= $this->SetTColor($ts['col'], true)."\n";
-					if ($ts['col'][0]==5 && ord($ts['col'][4])<100) {	// RGBa
-						$s .= $this->SetAlpha(ord($ts['col'][4])/100, 'Normal', true, 'F')."\n"; 
+					if ($ts['col']{0}==5 && ord($ts['col']{4})<100) {	// RGBa
+						$s .= $this->SetAlpha(ord($ts['col']{4})/100, 'Normal', true, 'F')."\n"; 
 					}
-					else if ($ts['col'][0]==6 && ord($ts['col'][5])<100) {	// CMYKa
-						$s .= $this->SetAlpha(ord($ts['col'][5])/100, 'Normal', true, 'F')."\n"; 
+					else if ($ts['col']{0}==6 && ord($ts['col']{5})<100) {	// CMYKa
+						$s .= $this->SetAlpha(ord($ts['col']{5})/100, 'Normal', true, 'F')."\n"; 
 					}
-					else if ($ts['col'][0]==1 && $ts['col'][2]==1 && ord($ts['col'][3])<100) {	// Gray
-						$s .= $this->SetAlpha(ord($ts['col'][3])/100, 'Normal', true, 'F')."\n"; 
+					else if ($ts['col']{0}==1 && $ts['col']{2}==1 && ord($ts['col']{3})<100) {	// Gray
+						$s .= $this->SetAlpha(ord($ts['col']{3})/100, 'Normal', true, 'F')."\n"; 
 					}
 					$s .= sprintf(' 1 0 0 1 %.4F %.4F cm', $ts['x']*_MPDFK, -$ts['y']*_MPDFK)."\n";
 					$s .= $sub;
@@ -4862,7 +4859,7 @@ function applyGPOSpdf($txt, $aix, $x, $y, $OTLdata, $textvar=0 ) {
 
 			// Get YPlacement from next Base character
 			$nextbase = $i+1;
-			while($OTLdata['group'][$nextbase]!='C') { $nextbase++; }
+			while($OTLdata['group']{$nextbase}!='C') { $nextbase++; }
 			if (isset($GPOSinfo[$nextbase]) && isset($GPOSinfo[$nextbase]['YPlacement']) && $GPOSinfo[$nextbase]['YPlacement']) { 
 				$YPlacement = $GPOSinfo[$nextbase]['YPlacement'] * $this->FontSizePt / $this->CurrentFont['unitsPerEm']; 
 			}
@@ -8876,9 +8873,9 @@ function _putannots() {	// mPDF 5.7.2
 				$annotcolor = ' /C [';
 				if (isset($pl['opt']['c']) AND $pl['opt']['c']) {
 					$col = $pl['opt']['c'];
-					if ($col[0]==3 || $col{0}==5) { $annotcolor .= sprintf("%.3F %.3F %.3F", ord($col{1})/255,ord($col{2})/255,ord($col{3})/255); }
-					else if ($col[0]==1) { $annotcolor .= sprintf("%.3F", ord($col{1})/255); }
-					else if ($col[0]==4 || $col[0]==6) { $annotcolor .= sprintf("%.3F %.3F %.3F %.3F", ord($col{1})/100,ord($col{2})/100,ord($col{3})/100,ord($col{4})/100); }
+					if ($col{0}==3 || $col{0}==5) { $annotcolor .= sprintf("%.3F %.3F %.3F", ord($col{1})/255,ord($col{2})/255,ord($col{3})/255); }
+					else if ($col{0}==1) { $annotcolor .= sprintf("%.3F", ord($col{1})/255); }
+					else if ($col{0}==4 || $col{0}==6) { $annotcolor .= sprintf("%.3F %.3F %.3F %.3F", ord($col{1})/100,ord($col{2})/100,ord($col{3})/100,ord($col{4})/100); }
 					else { $annotcolor .= '1 1 0'; }
 				}
 				else { $annotcolor .= '1 1 0'; }
@@ -22347,23 +22344,23 @@ function PaintDivBB($divider='',$blockstate=0,$blvl=0) {
 	if (isset($this->blk[$blvl]['box_shadow']) && $this->blk[$blvl]['box_shadow'] && $h > 0) {
 		foreach($this->blk[$blvl]['box_shadow'] AS $sh) {
 			// Colors
-			if ($sh['col'][0]==1) {
+			if ($sh['col']{0}==1) {
 				$colspace = 'Gray';
-				if ($sh['col'][2]==1) { $col1 = '1'.$sh['col'][1].'1'.$sh['col'][3]; }
+				if ($sh['col']{2}==1) { $col1 = '1'.$sh['col'][1].'1'.$sh['col'][3]; }
 				else { $col1 = '1'.$sh['col'][1].'1'.chr(100); }
 				$col2 = '1'.$sh['col'][1].'1'.chr(0);
 			}
-			else if ($sh['col'][0]==4) {	// CMYK
+			else if ($sh['col']{0}==4) {	// CMYK
 				$colspace = 'CMYK';
 				$col1 = '6'.$sh['col'][1].$sh['col'][2].$sh['col'][3].$sh['col'][4].chr(100);
 				$col2 = '6'.$sh['col'][1].$sh['col'][2].$sh['col'][3].$sh['col'][4].chr(0);
 			}
-			else if ($sh['col'][0]==5) {	// RGBa
+			else if ($sh['col']{0}==5) {	// RGBa
 				$colspace = 'RGB';
 				$col1 = '5'.$sh['col'][1].$sh['col'][2].$sh['col'][3].$sh['col'][4];
 				$col2 = '5'.$sh['col'][1].$sh['col'][2].$sh['col'][3].chr(0);
 			}
-			else if ($sh['col'][0]==6) {	// CMYKa
+			else if ($sh['col']{0}==6) {	// CMYKa
 				$colspace = 'CMYK';
 				$col1 = '6'.$sh['col'][1].$sh['col'][2].$sh['col'][3].$sh['col'][4].$sh['col'][5];
 				$col2 = '6'.$sh['col'][1].$sh['col'][2].$sh['col'][3].$sh['col'][4].chr(0);
@@ -25369,8 +25366,8 @@ function _tableRect($x, $y, $w, $h, $bord=-1, $details=array(), $buffer=false, $
 			// Precedence to darker colours at joins
 			$coldom = 0;
 			if (isset($details[$side]['c']) && is_array($details[$side]['c'])) { 
-				if ($details[$side]['c'][0]==3) { 	// RGB
-					$coldom = 10-(((ord($details[$side]['c'][1])*1.00)+(ord($details[$side]['c'][2])*1.00)+(ord($details[$side]['c'][3])*1.00))/76.5); 
+				if ($details[$side]['c']{0}==3) { 	// RGB
+					$coldom = 10-(((ord($details[$side]['c']{1})*1.00)+(ord($details[$side]['c']{2})*1.00)+(ord($details[$side]['c']{3})*1.00))/76.5); 
 				}
 			} // 10 black - 0 white
 			if ($coldom) { $dom += $coldom; }
