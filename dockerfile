@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y \
     git \
     curl \
     mysql-client \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd \
-    && docker-php-ext-enable pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli \
+    && docker-php-ext-enable pdo_mysql mbstring exif pcntl bcmath gd mysqli
 
 # Install Composer
-
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
