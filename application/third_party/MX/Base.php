@@ -37,7 +37,7 @@ require_once dirname(__FILE__).'/Config.php';
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  **/
-class CI extends CI_Controller
+class BASECI extends CI_Controller
 {
 	public static $APP;
 	
