@@ -68,9 +68,11 @@
         }
 
         .nav-link.active {
-            background-color: #C3A366;
-            color: #fff;
-            font-weight: bold;
+            /* background-color: #C3A366; */
+            /* color: #fff; */
+           background-color: #f6f8f7;
+           color:#31b372;
+           font-weight: bold;
         }
 
         .nav-link i {
