@@ -3,7 +3,6 @@
 
 date_default_timezone_set('Africa/Kampala');
 
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
 
 
 switch (ENVIRONMENT) {
