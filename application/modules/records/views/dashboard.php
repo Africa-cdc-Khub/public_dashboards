@@ -6,7 +6,7 @@
                 <iframe class="embed-responsive-item"
                     src="<?php 
                     $no_data =base_url().'error/error.html';
-                    if($active_url!='#'){ echo $active_url;}else{ echo ""} ?>"
+                    if($active_url!='#'){ echo $active_url;}else{ echo "$no_data"; } ?>"
                     style="border:0;" allowfullscreen>
                 </iframe>
             </div>
