@@ -20,7 +20,7 @@ services:
     networks:
       - app-network
     working_dir: /var/www/tools.africacdc.org/tools/public_dashboards
-    command: /bin/bash -c "composer install --ignore-platform-reqs && apache2-foreground"
+   
 
   mysql_client:
     image: mysql:5.7.42
