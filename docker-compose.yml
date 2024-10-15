@@ -8,7 +8,7 @@ services:
     volumes:
       - .:/var/www/tools.africacdc.org/tools/public_dashboards
     ports:
-      - "8080:8080"
+      - "808:80"
     environment:
       MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_USER: ${MYSQL_USER}
