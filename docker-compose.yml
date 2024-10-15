@@ -6,7 +6,7 @@ services:
     container_name: apache_php
     restart: always
     volumes:
-      - .:/var/www/html
+      - .:/var/www/tools.africacdc.org/tools/public_dashboards
     ports:
       - "8080:8080"
     environment:
@@ -19,7 +19,8 @@ services:
       - mysql_client
     networks:
       - app-network
-    command: /bin/bash -c "composer install && apache2-foreground"
+    working_dir: /var/www/tools.africacdc.org/tools/public_dashboards
+    command: /bin/bash -c "composer install --ignore-platform-reqs && apache2-foreground"
 
   mysql_client:
     image: mysql:5.7.42
