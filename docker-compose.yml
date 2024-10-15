@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  apache_php:
+    image: php:8.2.4-apache
+    container_name: apache_php
+    restart: always
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PORT: ${MYSQL_PORT}
+    depends_on:
+      - mysql_client
+    networks:
+      - app-network
+    command: /bin/bash -c "composer install && apache2-foreground"
+
+  mysql_client:
+    image: mysql:5.7.42
+    container_name: mysql_client
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOST: ${MYSQL_HOST}
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
