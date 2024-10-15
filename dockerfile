@@ -21,11 +21,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Enable Apache mod_rewrite for Laravel
 RUN a2enmod rewrite
 
-# Update Apache to use the correct DocumentRoot
-RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/tools.africacdc.org/tools/public_dashboards|' /etc/apache2/sites-available/000-default.conf
-
-# Update the Directory block to allow access to the new DocumentRoot
-RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/c\<Directory /var/www/tools.africacdc.org/tools/public_dashboards>\n    Options Indexes FollowSymLinks\n    AllowOverride All\n    Require all granted\n</Directory>' /etc/apache2/apache2.conf
+# Copy the custom Apache configuration into the container
+COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Set working directory
 WORKDIR /var/www/tools.africacdc.org/tools/public_dashboards
