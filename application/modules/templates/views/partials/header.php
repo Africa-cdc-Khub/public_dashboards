@@ -94,7 +94,7 @@
 			<div class="nav-header">
 
 				<div class="nav-toggle col-md-4"></div>
-				<div class="mobile_nav col-md-4"  style="float:right; margin-top:6px; margin-left:400px !important;">
+				<div class="mobile_nav col-md-4"  style="float:right; margin-top:6px; margin-left:350px !important;">
 					<ul>
 						<li>
 							<a href="#" data-toggle="modal" data-target="#login" class="theme-cl fs-lg">
