@@ -115,8 +115,8 @@
 						<?php endforeach;
 					} ?>
 						<li class="mobile-language-menu-container" style="margin:3px; display:none ;">
-							<select id="mobile-language-menu-container" class="form-control"
-								onchange="handleLanguageChange(this)">
+							<select id="mobile-language-menu-container" class="form-control mobile-language-menu-container"
+								onchange="handleLanguageChange(this)" style="border-radius:4px; display:none ;">
 								<option value="" disabled selected>Select Language</option>
 								<option value="en">English</option>
 								<option value="fr">French</option>
