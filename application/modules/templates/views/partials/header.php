@@ -132,7 +132,7 @@
 
 
 							<li>
-								<a href="#" data-toggle="modal" data-target="#login" class="ft-medium text-bold">
+								<a href="#" data-toggle="modal" data-target="#login" class="ft-medium text-bold mb-10">
 									<i class="lni lni-user mr-2"></i>Sign In
 								</a>
 							</li>
