@@ -130,16 +130,16 @@
 						<?php if (empty($this->session->userdata('user_id'))): ?>
 
 
-							<li style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
-								<a href="#" data-toggle="modal" data-target="#login" class="ft-medium text-bold mb-10">
+							<li class="nav-item" style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
+								<a href="#" class="nav-link" data-toggle="modal" data-target="#login" class="ft-medium text-bold mb-10">
 									<i class="fa fa-user-alt"></i>Sign In
 								</a>
 							</li>
 
 						<?php else: ?>
 
-							<li style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
-								<a href="<?php echo base_url('account/logout'); ?>" class="ft-medium"><i class="fa fa-arrow-alt-circle-right"></i>
+							<li class="nav-item" style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
+								<a class="nav-link" href="<?php echo base_url('account/logout'); ?>" class="ft-medium"><i class="fa fa-arrow-alt-circle-right"></i>
 									Logout
 								</a>
 							</li>
