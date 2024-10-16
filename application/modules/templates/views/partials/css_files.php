@@ -40,7 +40,13 @@
     .trans-section {
         margin: 100px;
     }
-
+    .nav-menu>li>a {
+        padding: 10px 18px;
+        display: inline-block;
+        font-weight: 400;
+        font-size: 15px;
+        color: #172228;
+    }
     .nav-item {
         list-style: none;
         margin: 0;
@@ -215,6 +221,10 @@
     .language-menu li {
         display: inline-block;
         margin-right: 10px;
+    }
+    .header{
+        height:40px;
+
     }
 </style>
 
