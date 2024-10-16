@@ -60,6 +60,8 @@
         text-decoration: none;
         color: #333;
         transition: background-color 0.3s, color 0.3s;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
     }
