@@ -5,8 +5,8 @@
 
     <!-- Search Bar -->
     <div class="row mb-4">
-      <div class="col-md-6 offset-md-3">
-        <div class="input-group">
+      <div class="col-md-12 offset-md-3">
+        <div class="input-group" style="width:60%; !important;">
           <input type="text" class="form-control" id="search-input" placeholder="Outbreak">
           <div class="input-group-append">
             <button class="btn btn-success p-3" type="button" id="search-button">
