@@ -226,7 +226,7 @@
         margin-right: 10px;
     }
     .header{
-        height:45px;
+        height:48.5px;
 
     }
 </style>
