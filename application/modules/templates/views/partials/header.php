@@ -127,20 +127,19 @@
 							</select>
 						</li>
 
-					<ul class="nav-menu nav-menu-social align-to-right">
 						<?php if (empty($this->session->userdata('user_id'))): ?>
 
 
-							<li>
+							<li style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
 								<a href="#" data-toggle="modal" data-target="#login" class="ft-medium text-bold mb-10">
-									<i class="lni lni-user mr-2"></i>Sign In
+									<i class="fa fa-user-alt"></i>Sign In
 								</a>
 							</li>
 
 						<?php else: ?>
 
-							<li>
-								<a href="<?php echo base_url('account/logout'); ?>" class="ft-medium">
+							<li style="float:right; margin-right:2px; border: 1px #f5f2f242 solid !important;">
+								<a href="<?php echo base_url('account/logout'); ?>" class="ft-medium"><i class="fa fa-arrow-alt-circle-right"></i>
 									Logout
 								</a>
 							</li>
@@ -149,7 +148,6 @@
 
 
 
-					</ul>
 
 
 

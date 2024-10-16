@@ -46,6 +46,7 @@
         font-weight: 400;
         font-size: 15px;
         color: #172228;
+        border: 1px #f5f2f2 solid;
     }
     .nav-item {
         list-style: none;
