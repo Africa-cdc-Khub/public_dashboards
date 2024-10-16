@@ -98,7 +98,7 @@
 				<!-- Use CSS to replace link text with flag icons -->
 
 
-				<ul class="nav-menu">
+				<ul class="nav-menu mt-1">
 
 					<?php
 					if (!empty($menus)) {
