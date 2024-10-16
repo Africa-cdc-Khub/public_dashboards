@@ -93,8 +93,8 @@
 		<nav id="navigation" class="navigation navigation-landscape">
 			<div class="nav-header">
 
-				<div class="nav-toggle"></div>
-				<div class="mobile_nav">
+				<div class="nav-toggle col-md-4"></div>
+				<div class="mobile_nav col-md-4"  style="float:right; margin-left:20px !important;">
 					<ul>
 						<li>
 							<a href="#" data-toggle="modal" data-target="#login" class="theme-cl fs-lg">
