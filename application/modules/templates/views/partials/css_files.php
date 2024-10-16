@@ -191,6 +191,19 @@
             }
 
         }
+        @media (max-width: 767px) {
+            .mobile-language-menu-container {
+                display: block;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mobile-language-menu-container {
+                display: none;
+            }
+        }
+
 
         .select2-selection__rendered {
             /*fixes jquery ui dropdown arrow merging with content */
@@ -233,7 +246,9 @@
         .text-secondary {
             color: var(--theme-color-secondary) !important;
         }
+        
     </style>
+    
 
 
 

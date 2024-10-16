@@ -19,11 +19,14 @@
 					</div>
 				</div>
 				<div class="col-lg-5 col-md-5 text-center ">
+					<a href="<?php echo base_url() ?>">
 					<h3 style="color:black !important; font-weight:bold; margin-bottom: 7px;" class="notranslate">
 						Africa CDC Event Dashboards
 						<h3 class="slogan fw-bold" style="font-size: 14px; margin-bottom: 7px; margin-left: 20px;">
 							<?= @$event ?> Public Dashboards
 						</h3>
+						</a>
+					
 				</div>
 				<div class="col-lg-4 col-md-4 text-end d-none d-md-block justify-content-end">
 					<div id="google_translate_element" style="display: none;"></div>
@@ -97,6 +100,7 @@
 			<div class="nav-header">
 
 				<div class="nav-toggle col-md-4"></div>
+
 				<div class="mobile_nav col-md-4" style="float:right; margin-top:6px; margin-left:350px !important;">
 					<ul>
 						<li>
@@ -107,11 +111,13 @@
 
 					</ul>
 
+
 				</div>
 			</div>
 			<div class="nav-menus-wrapper" style="transition-property: none;">
 
 				<!-- Use CSS to replace link text with flag icons -->
+
 
 				<ul class="nav-menu">
 
@@ -148,6 +154,21 @@
 								</a>
 							</li>
 						<?php endif; ?>
+						<li class="mobile-language-menu-container" style="display:none;">
+							<select id="mobile-language-menu" class="form-control"
+								onchange="handleLanguageChange(this)">
+								<option value="" disabled selected>Select Language</option>
+								<option value="en">English</option>
+								<option value="fr">French</option>
+								<option value="ar">Arabic</option>
+								<option value="es">Spanish</option>
+								<option value="pt">Portuguese</option>
+								<option value="sw">Swahili</option>
+							</select>
+						</li>
+
+
+
 					</ul>
 
 

@@ -84,7 +84,12 @@
 <div id="google_translate_element" style="display:none;"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js"
 	type="text/javascript"></script>
-
+<script>
+    function handleLanguageChange(selectElement) {
+        var selectedLanguage = selectElement.value;
+        doGTranslate(selectedLanguage);
+    }
+</script>
 <script type="text/javascript">
 	function googleTranslateElementInit() {
 		new google.translate.TranslateElement({

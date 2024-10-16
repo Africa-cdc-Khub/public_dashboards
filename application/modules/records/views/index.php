@@ -1,19 +1,19 @@
 <div class="container">
   <h2 class="mb-4"><i class="fas fa-viruses"></i> Outbreaks</h2>
 
-<!-- Search Bar -->
-<div class="row mb-4 justify-content-center">
-  <div class="col-md-6">
-    <div class="input-group">
-      <input type="text" class="form-control" id="search-input" placeholder="Outbreak">
-      <div class="input-group-append">
-        <button class="btn btn-success p-3" type="button" id="search-button">
-          <i class="fas fa-search"></i> Search
-        </button>
+  <!-- Search Bar -->
+  <div class="row mb-4 justify-content-center">
+    <div class="col-md-6">
+      <div class="input-group">
+        <input type="text" class="form-control" id="search-input" placeholder="Outbreak">
+        <div class="input-group-append">
+          <button class="btn btn-success p-3" type="button" id="search-button">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
   <!-- Outbreak Events Cards -->
@@ -42,6 +42,19 @@
               <i class="fas fa-user text-success"></i>
               Contact Person: <?= htmlspecialchars($event->coordinator_name) ?>
             </p>
+            <p class="card-text mb-3">
+              <i class="fas fa-envelope text-success"></i> <!-- Changed icon to envelope -->
+              Contact Email:
+              <?php
+              // Replace semicolons with 'mailto:' links dynamically within the string itself
+              $emails = htmlspecialchars($event->contact_email);
+              $emails_with_links = str_replace(';','', $emails);
+
+              
+              ?>
+              <a href="mailto:<?=$emails?>"><?=$emails_with_links?></a>
+            </p>
+
 
             <a href="<?= site_url('records/dashboard/' . $event->id) ?>" class="btn btn-outline-success btn-sm mt-auto">
               <i class="fas fa-info-circle"></i> View Dashboard
