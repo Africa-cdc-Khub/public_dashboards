@@ -21,6 +21,10 @@
                 <i class="fas fa-clock text-success"></i>
                 Status: <?= htmlspecialchars($event->status) ?>
               </p>
+                <p class="card-text mb-3">
+                <i class="fas fa-contact text-success"></i>
+                Contact Person: <?= htmlspecialchars($event->coordinator_name) ?>
+                </p>
               <a href="<?= site_url('records/dashboard/' . $event->id) ?>" class="btn btn-outline-success btn-sm mt-auto">
                 <i class="fas fa-info-circle"></i> View Dashboard
               </a>
