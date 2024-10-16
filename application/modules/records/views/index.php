@@ -1,19 +1,20 @@
 <div class="container">
   <h2 class="mb-4"><i class="fas fa-viruses"></i> Outbreaks</h2>
 
-  <!-- Search Bar -->
-  <div class="row mb-4 justify-content-center">
-    <div class="col-md-12 justify-content-center">
-      <div class="input-group" style="width:60%; !important;">
-        <input type="text" class="form-control" id="search-input" placeholder="Outbreak">
-        <div class="input-group-append">
-          <button class="btn btn-success p-3" type="button" id="search-button">
-            <i class="fas fa-search"></i> Search
-          </button>
-        </div>
+<!-- Search Bar -->
+<div class="row mb-4 justify-content-center">
+  <div class="col-md-6">
+    <div class="input-group">
+      <input type="text" class="form-control" id="search-input" placeholder="Outbreak">
+      <div class="input-group-append">
+        <button class="btn btn-success p-3" type="button" id="search-button">
+          <i class="fas fa-search"></i> Search
+        </button>
       </div>
     </div>
   </div>
+</div>
+
 
   <!-- Outbreak Events Cards -->
   <div class="row" id="outbreak-events">
