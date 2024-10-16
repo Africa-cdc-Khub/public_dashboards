@@ -30,28 +30,7 @@
 				</div>
 				<div class="col-lg-4 col-md-4 text-end d-none d-md-block justify-content-end">
 					<div id="google_translate_element" style="display: none;"></div>
-					<style>
-						.language-menu {
-							list-style-type: none;
-							padding: 0;
-							margin: 0;
-						}
-
-						.language-menu li {
-							display: inline-block;
-							margin-right: 10px;
-
-						}
-
-						/* Hide Google Translate banner */
-						.goog-te-banner-frame.skiptranslate {
-							display: none !important;
-						}
-
-						body {
-							top: 0px !important;
-						}
-					</style>
+					
 					<div class="menu-language-menu-container">
 
 						<ul id="menu-language-menu" class="language-menu">
@@ -135,8 +114,8 @@
 							</li>
 						<?php endforeach;
 					} ?>
-						<li class="mobile-language-menu-container" style="margin:3px; display:none;">
-							<select id="mobile-language-menu" class="form-control"
+						<li class="mobile-language-menu-container" style="margin:3px; display:none ;">
+							<select id="mobile-language-menu-container" class="form-control"
 								onchange="handleLanguageChange(this)">
 								<option value="" disabled selected>Select Language</option>
 								<option value="en">English</option>
