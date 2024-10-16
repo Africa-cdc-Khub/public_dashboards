@@ -20,7 +20,7 @@
     <!-- Outbreak Events Cards -->
     <div class="row" id="outbreak-events">
       <?php foreach ($outbreak_events as $event): ?>
-        <div class="col-lg-6 col-md-6 mb-4">
+        <div class="col-lg-12 col-md-12 mb-4">
           <div class="card shadow-sm">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">
