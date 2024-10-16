@@ -48,11 +48,11 @@
               <?php
               // Replace semicolons with 'mailto:' links dynamically within the string itself
               $emails = htmlspecialchars($event->contact_email);
-              $emails_with_links = str_replace(';','', $emails);
+       
 
               
               ?>
-              <a href="mailto:<?=$emails?>"><?=$emails_with_links?></a>
+              <a href="mailto:<?=$emails?>"><?=$emails?></a>
             </p>
 
 
