@@ -22,7 +22,8 @@
 					<h3 style="color:black !important; font-weight:bold; margin-bottom: 7px;" class="notranslate">
 						Africa CDC Event Dashboards
 						<h3 class="slogan fw-bold" style="font-size: 14px; margin-bottom: 7px; margin-left: 20px;">
-							<?=@$event?> Public Dashboards</h3>
+							<?= @$event ?> Public Dashboards
+						</h3>
 				</div>
 				<div class="col-lg-4 col-md-4 text-end d-none d-md-block justify-content-end">
 					<div id="google_translate_element" style="display: none;"></div>
@@ -38,10 +39,12 @@
 							margin-right: 10px;
 
 						}
+
 						/* Hide Google Translate banner */
 						.goog-te-banner-frame.skiptranslate {
 							display: none !important;
 						}
+
 						body {
 							top: 0px !important;
 						}
@@ -64,20 +67,20 @@
 									class="link notranslate">Arabic</a>
 							</li>
 							|
-								<li class="menu-item menu-item-gtranslate">
-									<a href="#" onclick="doGTranslate('es'); return false;" title="Spanish"
-										class="link notranslate">Español</a>
-								</li>
-								|
-								<li class="menu-item menu-item-gtranslate">
-									<a href="#" onclick="doGTranslate('pt'); return false;" title="Portuguese"
-										class="link nturl notranslate">Portuguese</a>
-								</li>
-								|
-								<li class="menu-item menu-item-gtranslate">
-									<a href="#" onclick="doGTranslate('sw'); return false;" title="Kiswahili"
-										class="link nturl notranslate">Swahili</a>
-								</li>
+							<li class="menu-item menu-item-gtranslate">
+								<a href="#" onclick="doGTranslate('es'); return false;" title="Spanish"
+									class="link notranslate">Español</a>
+							</li>
+							|
+							<li class="menu-item menu-item-gtranslate">
+								<a href="#" onclick="doGTranslate('pt'); return false;" title="Portuguese"
+									class="link nturl notranslate">Portuguese</a>
+							</li>
+							|
+							<li class="menu-item menu-item-gtranslate">
+								<a href="#" onclick="doGTranslate('sw'); return false;" title="Kiswahili"
+									class="link nturl notranslate">Swahili</a>
+							</li>
 						</ul>
 					</div>
 
@@ -94,7 +97,7 @@
 			<div class="nav-header">
 
 				<div class="nav-toggle col-md-4"></div>
-				<div class="mobile_nav col-md-4"  style="float:right; margin-top:6px; margin-left:350px !important;">
+				<div class="mobile_nav col-md-4" style="float:right; margin-top:6px; margin-left:350px !important;">
 					<ul>
 						<li>
 							<a href="#" data-toggle="modal" data-target="#login" class="theme-cl fs-lg">
@@ -106,23 +109,26 @@
 
 				</div>
 			</div>
-	<div class="nav-menus-wrapper" style="transition-property: none;">
+			<div class="nav-menus-wrapper" style="transition-property: none;">
 
 				<!-- Use CSS to replace link text with flag icons -->
 
-	<ul class="nav-menu">
-                 
+				<ul class="nav-menu">
+
 					<?php
-					if (!empty($menus)){
-					//@print_r($menus);
-					foreach ($menus as $menu): ?>
-						<li class="nav-item" role="presentation">
-							<a class="nav-link <?= ($this->uri->segment(4) == $menu->id) ? 'active' : '' ?>" id="<?= $menu->tab ?>-tab"
-								href="<?=base_url()?>records/dashboard/<?=$this->uri->segment(3)?>/<?=$menu->id?>" aria-selected="<?= ($this->uri->segment(1) == $menu->tab) ? 'true' : 'false' ?>">
-								<i class="fa <?= $menu->icon ?>"></i> <?= $menu->title ?>
-							</a>
-						</li>
-					<?php endforeach; }?>
+					if (!empty($menus)) {
+						//@print_r($menus);
+						foreach ($menus as $menu): ?>
+							<li class="nav-item" role="presentation">
+								<a class="nav-link <?= ($this->uri->segment(4) == $menu->id) ? 'active' : '' ?>"
+									id="<?= $menu->tab ?>-tab"
+									href="<?= base_url() ?>records/dashboard/<?= $this->uri->segment(3) ?>/<?= $menu->id ?>"
+									aria-selected="<?= ($this->uri->segment(1) == $menu->tab) ? 'true' : 'false' ?>">
+									<i class="fa <?= $menu->icon ?>"></i> <?= $menu->title ?>
+								</a>
+							</li>
+						<?php endforeach;
+					} ?>
 
 					<ul class="nav-menu nav-menu-social align-to-right">
 						<?php if (empty($this->session->userdata('user_id'))): ?>
