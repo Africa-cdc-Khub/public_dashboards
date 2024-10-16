@@ -135,6 +135,18 @@
 							</li>
 						<?php endforeach;
 					} ?>
+						<li class="mobile-language-menu-container" style="margin:3px; display:none;">
+							<select id="mobile-language-menu" class="form-control"
+								onchange="handleLanguageChange(this)">
+								<option value="" disabled selected>Select Language</option>
+								<option value="en">English</option>
+								<option value="fr">French</option>
+								<option value="ar">Arabic</option>
+								<option value="es">Spanish</option>
+								<option value="pt">Portuguese</option>
+								<option value="sw">Swahili</option>
+							</select>
+						</li>
 
 					<ul class="nav-menu nav-menu-social align-to-right">
 						<?php if (empty($this->session->userdata('user_id'))): ?>
@@ -154,18 +166,7 @@
 								</a>
 							</li>
 						<?php endif; ?>
-						<li class="mobile-language-menu-container" style="display:none;">
-							<select id="mobile-language-menu" class="form-control"
-								onchange="handleLanguageChange(this)">
-								<option value="" disabled selected>Select Language</option>
-								<option value="en">English</option>
-								<option value="fr">French</option>
-								<option value="ar">Arabic</option>
-								<option value="es">Spanish</option>
-								<option value="pt">Portuguese</option>
-								<option value="sw">Swahili</option>
-							</select>
-						</li>
+					
 
 
 
