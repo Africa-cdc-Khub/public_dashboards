@@ -15,17 +15,9 @@ class Dashboard extends MX_Controller
 
 	public function index()
 	{
-		$data['module'] = $this->dashmodule;
-		$data['title'] = "Main Dashboard";
-		$data['tabs'] = $this->dash_mdl->getData();
-		$data['uptitle'] = "Main Dashboard";
+
 
 		render('home', $data);
 	}
-	public function dashboardData()
-	{
 
-
-		//echo json_encode($data);
-	}
 }

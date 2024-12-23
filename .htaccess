@@ -37,6 +37,11 @@ Options All -Indexes
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
 
 <IfModule !mod_rewrite.c>
     # If we don't have mod_rewrite installed, all 404's

@@ -27,7 +27,8 @@
 			"react/react": "^1.4",
 		"guzzlehttp/guzzle": "^7.0",
 		"whtht/perfectly-cache": "^4.3",
-		"firebrandhq/silverstripe-excel-export": "^0.2.2"
+		"firebrandhq/silverstripe-excel-export": "^0.2.2",
+		"vlucas/phpdotenv": "^5.6"
 		
 	},
 	"autoload": {

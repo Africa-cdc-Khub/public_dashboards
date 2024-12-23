@@ -1,9 +1,19 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
 
-date_default_timezone_set('Africa/Kampala');
+use Dotenv\Dotenv;
 
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+// Initialize Dotenv
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+// Debug
+echo getenv('APP_ENV'); // Should output "development"
+
+
+
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 
 switch (ENVIRONMENT) {

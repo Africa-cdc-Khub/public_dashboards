@@ -16,8 +16,6 @@ class Account extends MX_Controller
 	}
 
 
-	
-
 	public function index()
 	{
 		$data['module'] = "auth";
@@ -28,8 +26,6 @@ class Account extends MX_Controller
 
 	}
 
-
-  
   
 	public function logout()
 	{

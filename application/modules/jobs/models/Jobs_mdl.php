@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard_mdl extends CI_Model
+class Jobs_mdl extends CI_Model
 {
 
 
@@ -10,5 +10,5 @@ class Dashboard_mdl extends CI_Model
 
         parent::__Construct();
     }
-
+    
 }
