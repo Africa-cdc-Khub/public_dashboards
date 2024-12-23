@@ -53,8 +53,9 @@ class Jobs extends MX_Controller
 		if(!empty($data->rows)){
 			$this->db->truncate('mpox_cases_dates');
 		}
+		//dd($data);
 		foreach($data->rows as $row):
-		$data = array("organisationunitid" =>$row[0], "organisationunitname" =>$row[1], "organisationunitcode" =>$row[2], "periodid" =>$row[4], "periodname" =>$row[5], "periodcode" =>$row[6], "Confirmed_Mpox_Cases" =>$row[9], "Mpox_Deaths" =>$row[10], "Suspected_Mpox_Cases" =>$row[11]);
+		$data = array("organisationunitid" =>$row[0], "organisationunitname" =>$row[1], "organisationunitcode" =>$row[2], "periodid" =>$row[4], "periodname" =>$row[5], "periodcode" =>$row[6], "Confirmed_Mpox_Cases" =>$row[8], "Mpox_Deaths" =>$row[9], "Suspected_Mpox_Cases" =>$row[10]);
 		
 		
 			$this->db->insert('mpox_cases_dates', $data);
