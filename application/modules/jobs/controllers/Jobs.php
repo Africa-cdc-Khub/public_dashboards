@@ -47,8 +47,8 @@ class Jobs extends MX_Controller
 
 		// Initialize the data array
 		$allData = array();
-		// $headr[] = 'Content-length: 0';
-		// $headr[] = 'Content-type: application/json';
+		$headr[] = 'Content-length: 0';
+		$headr[] = 'Content-type: application/json';
 		$http = new HttpUtil();
 
 			// Fetch data from the current URL
