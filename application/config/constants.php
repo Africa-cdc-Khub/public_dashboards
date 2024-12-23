@@ -49,6 +49,8 @@ defined('FOPEN_WRITE_CREATE_STRICT')            OR define('FOPEN_WRITE_CREATE_ST
 defined('FOPEN_READ_WRITE_CREATE_STRICT')       OR define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 
 defined('DATA_URL')  OR define('DATA_URL', 'https://ems.africacdc.org/');
+defined('DHIS2_USERNAME')  OR define('DHIS2_USERNAME', $_ENV['DHIS2_USERNAME']);
+defined('DHIS2_PASSWORD')  OR define('DHIS2_PASSWORD', $_ENV['DHIS2_PASSWORD']);
 
 defined('PER_PAGE') or define('PER_PAGE', '20');
 

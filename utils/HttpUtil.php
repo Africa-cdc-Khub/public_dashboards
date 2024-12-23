@@ -5,11 +5,11 @@ class HttpUtil{
 
     public  function __construct(){
 
-        $this->CI = & get_instance();
-        
 
     }
-
+ public function ci (){
+    return get_instance();
+ }
  public function curlsendHttpPost($endpoint,$headers,$body){
     $url=DATA_URL.$endpoint;
     $ch = curl_init($url);
