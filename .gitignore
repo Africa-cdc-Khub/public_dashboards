@@ -9,10 +9,10 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 /vendor/
-database.php
 node_modules
 /Afcdc theme/
 
 # Exclud Uploads From Git
 /uploads/
+.env
 .env
