@@ -1,8 +1,6 @@
 <?php
-
+use Elastic\Elasticsearch\ClientBuilder;
 use utils\HttpUtil;
-defined('BASEPATH') or exit('No direct script access allowed');
-
 class Jobs extends MX_Controller
 {
 
@@ -18,20 +16,7 @@ class Jobs extends MX_Controller
 	{
 		echo "DASHBOARD API";
 	}
-	public function fetch_data()
-    {
-
-        $http = new HttpUtil();
-        $headr = array();
-        $headr[] = 'Content-length: 0';
-        $headr[] = 'Content-type: application/json';
- 
-        $endpoint = 'mpox_data/api/mpox/mpox_cases_dates';
-
-        $response = $http->curlgetHttp($endpoint, $headr, []);
-		$data = $response;
-		dd($data);
-    }
+	
 	function fetch_dhis2data($uri)
 	{
 
@@ -105,8 +90,11 @@ $data = array("organisationunitid" =>$row[0], "organisationunitname" =>$row[1], 
 endforeach;
 echo $this->db->affected_rows();
 }
-
-	
+public function mpox_dhis_data(){
+	$this->dates_data();
+	$this->last_weeks_data();
+	$this->last_4weeks_data();
+}
 
 
 
