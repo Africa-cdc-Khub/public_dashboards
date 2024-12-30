@@ -63,7 +63,7 @@ class Jobs extends MX_Controller
 	
 		$this->db->insert('mpox_cases_weeks', $data);
 	
-	
+	//
 	endforeach;
 	echo $this->db->affected_rows();
 
