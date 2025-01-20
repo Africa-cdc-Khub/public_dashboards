@@ -43,7 +43,7 @@ class Jobs extends MX_Controller
 		}
 		//dd($data);
 		foreach($dataArray as $row):
-dd($row);
+
 			$data = array(
 				"organisationunitid" => $row->organisationunitid,
 				"organisationunitname" => $row->organisationunitname,
