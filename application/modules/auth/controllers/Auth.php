@@ -12,41 +12,45 @@ class Auth extends MX_Controller
 
   public function login()
   {
-    $this->session->unset_userdata('error_message');
-
-    $postdata = $this->input->post();
-
-
-    $username = $postdata['username'];
-    $password = $postdata['password'];
-
-    $hash = $this->argonhash->make($password);
-
-    $data = (array) $this->auth_mdl->login([
-      'username' => $username,
-      'password' => $password
-    ]);
-    //dd($data);
-   
-   
-    if (empty($data) || !$this->argonhash->check($password, $data['password'])) {
-    
-      $this->session->set_flashdata('error_message', 'Invalid email/username or password');
-      redirect('records');
-    }
-
-    unset($data['password']);
-
-    $data['region']      = $this->auth_mdl->access_level1($data['user_id']);
-    $data['country']     = $this->auth_mdl->access_level2($data['user_id']);
-    $data['permissions'] = $this->auth_mdl->user_permissions($data['role']);
-    $data['is_admin']    = true;
-
-    $this->session->set_userdata($data);
-    //dd($data);
-
-    redirect('records');
+      $this->session->unset_userdata('error_message');
+  
+      $postdata = $this->input->post();
+  
+      $username = $postdata['username'];
+      $password = $postdata['password'];
+  
+      // Fetch user data from database
+      $user = $this->auth_mdl->login(['username' => $username]);
+  
+      // Check if user exists
+      if (empty($user)) {
+          $this->session->set_flashdata('error_message', 'Invalid username or password');
+          redirect('records');
+      }
+  
+      // Ensure user data is an array
+      $user = (array) $user;
+  
+      // Verify the entered password against the stored hash
+      if (!$this->argonhash->check($password, $user['password'])) {
+          $this->session->set_flashdata('error_message', 'Invalid username or password');
+          redirect('records');
+      }
+  
+      // Remove password before storing in session
+      unset($user['password']);
+  
+      // Retrieve additional user access details
+      $user['permissions'] = $this->auth_mdl->user_permissions($user['role']);
+      $user['is_admin']    = true;
+  
+      // Set user session data
+      $this->session->set_userdata($user);
+  
+      // Redirect to dashboard or intended page
+      redirect('outbreaks');
   }
+  
 
   public function profile()
   {
