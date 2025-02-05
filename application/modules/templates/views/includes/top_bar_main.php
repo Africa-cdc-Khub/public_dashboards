@@ -3,7 +3,7 @@
 	<div class=" container">
 		<div class="main-header-left ">
 			<a class="animated-arrow hor-toggle horizontal-navtoggle"><span></span></a><!-- sidebar-toggle-->
-			<a class="header-brand" href="<?php echo base_url() ?>">
+			<a class="header-brand" href="<?php echo base_url() ?>dashboard">
 				<img src="<?php echo base_url() ?>assets/images/logo.png" id="change-image" style="filter: brightness(0) invert(1);" width=250>
 			</a>
 		</div>
