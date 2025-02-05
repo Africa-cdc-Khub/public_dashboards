@@ -1,10 +1,7 @@
 
+    <div class="container mt-5">
+        <h5 class="mb-4">Edit Menu Links for Outbreak</h5>
 
-<div class="card shadow-sm">
-            <div class="card-header text-black">
-                <h5 class="mb-0">Manage Outbreak Menu Links</h5>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
         <!-- Outbreak Selection -->
         <div class="form-group">
             <label for="outbreakSelect">Select Outbreak</label>
@@ -56,4 +53,3 @@
             <button type="button" class="btn btn-info" id="copyMenuItems">Copy Menu Items</button>
         </div>
     </div>
- </div>

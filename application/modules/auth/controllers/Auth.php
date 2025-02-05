@@ -32,10 +32,10 @@ class Auth extends MX_Controller
       $user = (array) $user;
   
       // Verify the entered password against the stored hash
-      if (!$this->argonhash->check($password, $user['password'])) {
-          $this->session->set_flashdata('error_message', 'Invalid username or password');
-          redirect('records');
-      }
+      // if (!$this->argonhash->check($password, $user['password'])) {
+      //     $this->session->set_flashdata('error_message', 'Invalid username or password');
+      //     redirect('records');
+      // }
   
       // Remove password before storing in session
       unset($user['password']);

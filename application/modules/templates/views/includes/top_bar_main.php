@@ -1,15 +1,15 @@
 <!-- Main-content -->
-<div class="main-header main-header-fixed" style="background:grey; color:#FFF !important;">
-	<div class=" container">
+<div class="main-header main-header-fixed" style="background:#2fb855; color:#FFF !important;">
+	<div class="container mt-2">
 		<div class="main-header-left ">
 			<a class="animated-arrow hor-toggle horizontal-navtoggle"><span></span></a><!-- sidebar-toggle-->
-			<a class="header-brand" href="<?php echo base_url() ?>dashboard">
-				<img src="<?php echo base_url() ?>assets/images/logo.png" id="change-image" style="filter: brightness(0) invert(1);" width=250>
+			<a class="header-brand" href="#">
+				<img src="<?php echo base_url() ?>assets/images/logo.png" id="change-image" style="filter: brightness(0) invert(1);" width=200>
 			</a>
 		</div>
 		<div class="main-header-center">
 			<div class="responsive-logo">
-				<img src="<?php echo base_url() ?>assets/images/logo.png" id="change-image" style="filter: brightness(0) invert(1);" width=250px>
+				<img src="<?php echo base_url() ?>assets/images/logo.png" id="change-image" style="filter: brightness(0) invert(1);" width=200px>
 			</div>
 		</div>
 		<div class="main-header-right">
@@ -170,20 +170,12 @@
 					</div>
 				</div>
 			</div><!-- Notification closed -->
-			<div class="dropdown main-header-message right-toggle">
-				<a class="nav-link menu-icons" data-toggle="sidebar-right" data-target=".sidebar-right">
-					<svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="3" y1="12" x2="21" y2="12"></line>
-						<line x1="3" y1="6" x2="21" y2="6"></line>
-						<line x1="3" y1="18" x2="21" y2="18"></line>
-					</svg>
-				</a>
-			</div><!-- Main-header-message closed -->
-			<div class="dropdown main-profile-menu nav nav-item nav-link">
-				<a class="profile-user" href=""><img alt="" src="<?php echo base_url() ?>assets/img/faces/6.jpg"></a>
+			
+			<div class="dropdown nav-item main-header-notification">
+			<a class="profile-user mb-1" href="" style="background:#FFF; border-radius:8px; font-size:12px;"><i class="fa fa-user"></i> <?=$this->session->userdata('name');?></a>
 				<div class="dropdown-menu animated fadeInUp">
-					<div class="main-header-profile header-img">
-						<h6>Mack Adamia</h6><span>Premium Member</span>
+					<div class="main-header-profile header-img" style="background:#2fb855 !important;">
+				
 					</div>
 					<a class="dropdown-item" href="profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
 					<a class="dropdown-item" href="editprofile.html"><i class="bx bxs-edit"></i> Edit Profile</a>

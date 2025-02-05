@@ -1,9 +1,5 @@
 
-<div class="card shadow-sm">
-            <div class="card-header text-black">
-                <h5 class="mb-0">Manage Outbreaks</h5>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+	<h5 class="mb-4">Outbreak Management</h5>
 	<table class="table table-bordered table-hover">
 		<thead class="thead-dark">
 			<tr>
@@ -96,6 +92,4 @@
 				</div>
 			</form>
 		</div>
-	</div>
-	</div>
 	</div>

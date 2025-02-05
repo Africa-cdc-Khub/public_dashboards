@@ -1,9 +1,8 @@
 
-<div class="card shadow-sm">
-            <div class="card-header text-black">
-                <h5 class="mb-0">Assign Menu Links to an Outbreak</h5>
-            </div>
-            <div class="card-body" style="background: #f8f9fa;">
+    <div class="container mt-5">
+        <h5 class="mb-4">Assign Menu Links to an Outbreak</h5>
+
+        <!-- Outbreak Selection -->
         <div class="form-group">
             <label for="outbreakSelect">Select Outbreak</label>
             <select class="form-control" id="outbreakSelect" name="outbreak_id" required>
@@ -48,4 +47,4 @@
             <button type="submit" class="btn btn-primary mb-3">Save Menu Links</button>
         </form>
     </div>
-    </div>
+
