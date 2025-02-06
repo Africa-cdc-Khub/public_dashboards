@@ -177,11 +177,11 @@
 					<div class="main-header-profile header-img" style="background:#2fb855 !important;">
 				
 					</div>
-					<a class="dropdown-item" href="profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
+					<!-- <a class="dropdown-item" href="profile.html"><i class="bx bx-user-circle"></i> My Profile</a>
 					<a class="dropdown-item" href="editprofile.html"><i class="bx bxs-edit"></i> Edit Profile</a>
 					<a class="dropdown-item" href="chat.html"><i class="bx bx-envelope"></i> Chat</a>
-					<a class="dropdown-item" href="account-setting.html"><i class="bx bx-cog"></i> Account Settings</a>
-					<a class="dropdown-item" href="signin.html"><i class="bx bx-log-out-circle"></i> Sign Out</a>
+					<a class="dropdown-item" href="account-setting.html"><i class="bx bx-cog"></i> Account Settings</a> -->
+					<a class="dropdown-item" href="<?php echo base_url('auth/logout')?>"><i class="bx bx-log-out-circle"></i> Sign Out</a>
 				</div>
 			</div><!-- Main-profile-menu closed -->
 			<button class="navbar-toggler navresponsive-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4" aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
