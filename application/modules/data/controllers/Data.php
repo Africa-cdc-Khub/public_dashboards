@@ -46,7 +46,7 @@ class Data extends MX_Controller
 			$field_type = strtolower($field['Type']);
 	
 			// Skip the 'id' field entirely
-			if ($field_name == 'id') {
+			if ($field_name == 'id'|| $field_name == 'no' ) {
 				continue;
 			}
 	
@@ -64,6 +64,15 @@ class Data extends MX_Controller
 			} elseif ($field_name == 'member_state') {
 				// Fetch distinct values for the 'member_state' field
 				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `member_states`");
+				$distinct_values = $distinct_query->result_array();
+	
+				$input_type = 'select';
+				$enum_values = array_column($distinct_values, $field_name);
+			}
+			elseif ($field_name == 'outbreak_id') {
+				// Fetch distinct values for the 'member_state' field
+				$outbreak_id = $this->session->userdata('outbreak_id');
+				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `outbreak_events` WHERE outbreak_id='$outbreak_id'");
 				$distinct_values = $distinct_query->result_array();
 	
 				$input_type = 'select';

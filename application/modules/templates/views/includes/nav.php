@@ -21,17 +21,26 @@
 					<ul class="sub-menu">
 						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/response_plan_indicators/2" class="slide-item">Response Plan Indicators</a></li>
 						
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/countries_categories/2" class="slide-item">Country Categorization</a></li>
+						
 					</ul>
 				</li>
 				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Resource Tracking<i class="fe fe-chevron-down horizontal-icon"></i></a>
 					<ul class="sub-menu">
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/funding" class="slide-item">Partner Funding (links to Partner Fund)</a></li>
+					    <li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/continental_response_budget/2" class="slide-item">Budget for Continental Response</a></li>
+					    <li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/imst_pillar_budget/2" class="slide-item">IMST Pillar Budget</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/cash_donations/2" class="slide-item">Cash Donations (Maps to Commitments)</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/partner_fund/2" class="slide-item">Partner Funding (links to Partner Fund)</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/budget_for_14_ms/2" class="slide-item">Readiness Budget 14 States</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/budget_for_15_ms/2" class="slide-item">Readiness Budget 15 Member States</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/vaccine_donations/2" class="slide-item">Vaccine Donations</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/other_donations/2" class="slide-item">Other Contributions</a></li>
 						
 					</ul>
 				</li>
 				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Partnerships<i class="fe fe-chevron-down horizontal-icon"></i></a>
 					<ul class="sub-menu">
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/funding" class="slide-item">Partner Funding (links to Partner Fund)</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/pillars/2" class="slide-item"></a>Mpox Pillars</li>
 						
 					</ul>
 				</li>
