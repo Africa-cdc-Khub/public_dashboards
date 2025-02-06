@@ -72,7 +72,7 @@ class Data extends MX_Controller
 			elseif ($field_name == 'outbreak_id') {
 				// Fetch distinct values for the 'member_state' field
 				$outbreak_id = $this->session->userdata('outbreak_id');
-				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `outbreak_events` WHERE outbreak_id='$outbreak_id'");
+				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `outbreak_events` WHERE id='$outbreak_id'");
 				$distinct_values = $distinct_query->result_array();
 	
 				$input_type = 'select';
