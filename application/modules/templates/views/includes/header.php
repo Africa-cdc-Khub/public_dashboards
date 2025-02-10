@@ -16,10 +16,10 @@
 
 	<!-- Icons css -->
 	<link href="<?php echo base_url() ?>assets/css/icons.css" rel="stylesheet">
-
+    
 	<!-- Bootstrap css -->
 	<link rel="stylesheet" href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css">
-
+	
 	<!-- Right-sidemenu css -->
 	<link href="<?php echo base_url() ?>assets/plugins/sidebar/sidebar.css" rel="stylesheet">
 
@@ -37,17 +37,20 @@
 
 	<!-- Darktheme css -->
 	<link href="<?php echo base_url() ?>assets/css/style-dark.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/v/dt/dt-1.13.1/b-2.3.3/b-html5-2.3.3/datatables.min.css" />
 
 	<!-- Map css-->
 	<link href="<?php echo base_url() ?>assets/plugins/jqvmap/jqvmap.min.css" rel="stylesheet">
 
-	<!-- Switcher css-->
-	<link href="<?php echo base_url() ?>assets/switcher/css/switcher.css" rel="stylesheet">
-	<link href="<?php echo base_url() ?>assets/switcher/demo.css" rel="stylesheet">
+	<!-- Switcher css
+	<link href="<?php //echo base_url() ?>assets/switcher/css/switcher.css" rel="stylesheet">
+	<link href="<?php //echo base_url() ?>assets/switcher/demo.css" rel="stylesheet"> -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 	<!-- Animations css -->
 	<link href="<?php echo base_url() ?>assets/css/animate.css" rel="stylesheet">
-	<script src="<?php echo base_url() ?>node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="<?php echo base_url() ?>node_modules/highcharts/highcharts.js"></script>
 	<script src="<?php echo base_url() ?>node_modules/highcharts/highcharts-more.js"></script>
 	<script src="<?php echo base_url() ?>node_modules/highcharts/modules/solid-gauge.js"></script>

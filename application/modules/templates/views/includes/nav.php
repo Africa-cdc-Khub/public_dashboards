@@ -40,19 +40,12 @@
 				</li>
 				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Partnerships<i class="fe fe-chevron-down horizontal-icon"></i></a>
 					<ul class="sub-menu">
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/pillars/2" class="slide-item"></a>Mpox Pillars</li>
+						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/pillars/2" class="slide-item">Outbreak Pillars</a></li>
 						
 					</ul>
 				</li>
 					
 
-				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Performance<i class="fe fe-chevron-down horizontal-icon"></i></a>
-					<ul class="sub-menu">
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>kpi/create" class="slide-item">Add Focus Areas</a></li>
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>kpi/create" class="slide-item">Add Indicators</a></li>
-						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>kpi/data" class="slide-item">Manage Data</a></li>
-					</ul>
-				</li>
 
 
 

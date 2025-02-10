@@ -30,23 +30,52 @@ class Data extends MX_Controller
 	}
 	public function generate_form($table, $num_columns, $old_values = [])
 	{
-		// Get table schema
-		$schema_query = $this->db->query("SHOW COLUMNS FROM " . $table);
-		$schema = $schema_query->result_array();
-	
+		//Get table schema
+		// $schema_query = $this->db->query("SHOW COLUMNS FROM " . $table);
+		// $schema = $schema_query->result_array();
+
+		$schema_query = $this->db->query("
+		SELECT COLUMN_NAME as Field, COLUMN_TYPE as Type, COLUMN_COMMENT as Comment
+		FROM INFORMATION_SCHEMA.COLUMNS 
+		WHERE TABLE_SCHEMA = DATABASE() 
+		AND TABLE_NAME = '" . $table . "'
+	     ");
+		 $schema = $schema_query->result_array();
+
+		 //dd($schema);
 		// Bootstrap column width (12 / num_columns)
 		$col_width = 12 / max(1, min($num_columns, 12));
 	
 		// Start form with Bootstrap styling
-		$form_html = '<form method="POST" action="" class="p-4 border rounded">';
+		
+		$form_html = form_open("data/save/" . $table, [
+			'class' => 'p-4 border rounded forms_data',
+			'method' => 'post',
+			'id' => 'tables_data'
+		]);
+		
+		
+		$form_html .= '<div class="mb-2 mt-2 row">
+		<a href="'.base_url('data/view/'.$table).'" class="btn btn-md btn-primary"><i class="fa fa-eye"></i>View Data</a></div>';
 		$form_html .= '<div class="row">';
+
+
+		
 	
 		foreach ($schema as $field) {
 			$field_name = $field['Field'];
+			$fe = $field['Comment'];
+			if(!empty($fe)){
+				$field_extra = ' - '.$fe;
+			}
+			else{
+				$field_extra ='';
+			}
+
 			$field_type = strtolower($field['Type']);
 	
 			// Skip the 'id' field entirely
-			if ($field_name == 'id'|| $field_name == 'no' ) {
+			if ($field_name == 'id'|| $field_name == 'no'|| $field_name == 'created_at'|| $field_name == 'updated_at' ) {
 				continue;
 			}
 	
@@ -63,7 +92,7 @@ class Data extends MX_Controller
 				$enum_values = array_column($distinct_values, $field_name);
 			} elseif ($field_name == 'member_state') {
 				// Fetch distinct values for the 'member_state' field
-				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `member_states`");
+				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `member_states` ORDER BY $field_name ASC");
 				$distinct_values = $distinct_query->result_array();
 	
 				$input_type = 'select';
@@ -72,12 +101,23 @@ class Data extends MX_Controller
 			elseif ($field_name == 'outbreak_id') {
 				// Fetch distinct values for the 'member_state' field
 				$outbreak_id = $this->session->userdata('outbreak_id');
+				//dd($outbreak_id);
 				$distinct_query = $this->db->query("SELECT DISTINCT id FROM `outbreak_events` WHERE id='$outbreak_id'");
 				$distinct_values = $distinct_query->result_array();
 	
 				$input_type = 'select';
-				$enum_values = array_column($distinct_values, $field_name);
+				$enum_values = array_column($distinct_values, 'id');
+				$readonly = "readonly";
 			}
+			elseif ($field_name == 'is_verified') {
+				$input_type = 'select';
+				
+				// Force the distinct values to be 0
+				$enum_values = [0];
+				
+				$readonly = "readonly";
+			}
+			
 			elseif ($field_name == 'value') {
 				// Fetch distinct values for the 'member_state' field
 				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `$table`");
@@ -103,18 +143,26 @@ class Data extends MX_Controller
 			// Open column
 			$form_html .= '<div class="col-md-' . $col_width . '">';
 			$form_html .= '<div class="form-group">';
-			$form_html .= '<label for="' . $field_name . '">' . ucfirst(str_replace('_', ' ', $field_name)) . '</label>';
+			$form_html .= '<label for="' . $field_name . '">' . ucfirst(str_replace('_', ' ', $field_name)).$field_extra. '</label>';
 			
 			// Generate input field
 			if ($input_type == 'textarea') {
 				$form_html .= '<textarea class="form-control" name="' . $field_name . '" id="' . $field_name . '">' . $old_value . '</textarea>';
 			} elseif ($input_type == 'select') {
-				$form_html .= '<select class="form-control" name="' . $field_name . '" id="' . $field_name . '">';
-				foreach ($enum_values as $value) {
-					$selected = ($old_value == $value) ? 'selected' : '';
-					$form_html .= '<option value="' . $value . '" ' . $selected . '>' . ucfirst($value) . '</option>';
+			$form_html .= '<select class="form-control" name="' . $field_name . '" id="' . $field_name . '" ' . @$readonly . '>';
+			foreach ($enum_values as $value) {
+				$selected = ($old_value == $value) ? 'selected' : '';
+				if($field_name==='outbreak_id'){
+				$id = $this->session->userdata('outbreak_id');
+				$form_html .= '<option value="' . $value . '" ' . $selected . '>' . get_outbreak($id)->outbreak_name . '</option>';
 				}
-				$form_html .= '</select>';
+				else{
+				$form_html .= '<option value="' . $value . '" ' . $selected . '>' . ucfirst($value) . '</option>';
+
+				}
+			}
+			$form_html .= '</select>';
+
 			} else {
 				$form_html .= '<input type="' . $input_type . '" class="form-control" name="' . $field_name . '" id="' . $field_name . '" value="' . $old_value . '">';
 			}
@@ -126,331 +174,160 @@ class Data extends MX_Controller
 		$form_html .= '</div>'; // Close row
 	
 		// Submit button
-		$form_html .= '<button type="submit" class="btn btn-primary mt-3">Save</button>';
+		$form_html .= '<button type="submit" class="btn btn-primary mt-3"><i class="fa fa-file"></i>Save</button>';
 		$form_html .= '</form>';
 	
 		return $form_html;
 	}
 
+	public function view($table)
+{
+    $data['module'] = $this->module;
+    $data['title']  = $this->title;
+    $data['uptitle']   = "Data";
+    
+    // Fetch all data from the table
+    $data['rows'] = $this->db->get($table)->result_array();
+    
+    // Generate the editable table
+    $data['form'] = $this->generate_editable_table($table, $data['rows']);
+    
+    render('add', $data);
+}
 
-	public function create()
-	{
-		$data['module'] = $this->module;
-		$data['title'] = $this->title;
-		$data['uptitle'] = "Add Outbreaks";
-		$data['outbreaks'] = $this->outbreaksmodel->get();
+public function generate_editable_table($table, $rows)
+{
+    // Get table schema
+    $schema_query = $this->db->query("SHOW COLUMNS FROM " . $table);
+    $schema = $schema_query->result_array();
+	// Columns to exclude from display
+    $excluded_columns = ['is_verified', 'created_at', 'updated_at'];
 
-		render('add', $data);
-	}
-
-	public function create_links()
-	{
-		$data['module'] = $this->module;
-		$data['title'] = $this->title;
-		$data['uptitle'] = "Add Outbreaks";
-		$data['outbreaks'] = $this->outbreaksmodel->get();
-
-		render('links', $data);
-	}
-	public function edit_links()
-	{
-		$data['module'] = $this->module;
-		$data['title'] = $this->title;
-		$data['uptitle'] = "Add Outbreaks";
-		$data['outbreaks'] = $this->outbreaksmodel->get();
-
-		render('edit_links', $data);
-	}
-
-
-	public function add()
-	{
+    // Start table with Bootstrap styling and DataTables integration
+	$table_html = '<div class="mb-2 mt-2 row">
+	<a href="'.base_url('data/form/'.$table).'/2" class="btn btn-md btn-primary"><i class="fa fa-plus"></i>Add Data</a></div>';
 	
+    $table_html .= '<table id="data-table" class="table table-bordered table-striped">';
+    $table_html .= '<thead><tr>';
 
-		// Get form data
-		$data = [
-			'outbreak_name' => $this->input->post('outbreak_name'),
-			'outbreak_type' => $this->input->post('outbreak_type'),
-			'start_date' => $this->input->post('start_date'),
-			'end_date' => $this->input->post('end_date'),
-			'severity_level' => $this->input->post('severity_level'),
-			'status' => $this->input->post('status'),
-			'affected_regions' => $this->input->post('affected_regions'),
-			'coordinator_name' => $this->input->post('coordinator_name'),
-			'contact_email' => $this->input->post('contact_email'),
-			'contact_phone' => $this->input->post('contact_phone'),
-			'description' => $this->input->post('description')
-		];
+    // Generate table headers
+    foreach ($schema as $field) {
+        $field_name = $field['Field'];
+		if (!in_array($field_name, $excluded_columns)) {
+			$table_html .= '<th>' . ucfirst(str_replace('ID', '', str_replace('_', ' ', $field_name))) . '</th>';
 
-		// Insert outbreak data into the database
-		$result = $this->outbreaksmodel->insert($data);
+        }
+    }
+    $table_html .= '<th>Actions</th>';
+    $table_html .= '</tr></thead>';
+    $table_html .= '<tbody>';
 
-		if ($result) {
-			$response = [
-				'success' => true,
-				'message' => 'Outbreak added successfully'
-			];
-		} else {
-			$response = [
-				'success' => false,
-				'message' => 'Failed to add outbreak'
-			];
-		}
+    
+     // Generate table rows while excluding specific columns
+	 foreach ($rows as $row) {
+        $table_html .= '<tr data-id="' . $row['id'] . '" data-table="' . $table . '">';
+        foreach ($schema as $field) {
+            $field_name = $field['Field'];
+            if (!in_array($field_name, $excluded_columns)) {
+                $fv = htmlspecialchars($row[$field_name], ENT_QUOTES, 'UTF-8');
+                if ($field_name == 'outbreak_id') {
+                    $fv = get_outbreak($fv)->outbreak_name;  
+                }
+				if($field_name==='outbreak_id'|| $field_name==='id'){
+                	$editable = 'false';
 
-		// Return JSON response
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
+				}
+				else{
+					$editable = 'true';
 
-	public function edit($id, $status=FALSE)
-	{
-		// Load outbreak by ID for GET request or failed POST validation
-		$outbreak = $this->outbreaksmodel->get_by_id($id);
-
-		if (!$outbreak) {
-			show_404(); // If no outbreak is found, show a 404 page
-			return;
-		}
-
-		// Handle POST request (update)
-		if ($this->input->post()) {
-			// Collect the input data
-			if(!$this->input->post('status')){
-			$data['status'] = $status;
-			}
-			$data =$this->input->post();
-
+				}
+				
 			
-
-			// Update the outbreak
-			$result = $this->outbreaksmodel->update($id, $data);
-
-			if ($result) {
-				$response = [
-					'success' => true,
-					'message' => 'Outbreak updated successfully',
-					'data' => $this->outbreaksmodel->get_by_id($id)
-				];
-			} else {
-				$response = [
-					'success' => false,
-					'message' => 'Failed to update outbreak'
-				];
-			}
-
-			// Return JSON response for AJAX call
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-		} else {
-			// Handle GET request (display the edit form)
-			$data['outbreak'] = $outbreak;
-			$this->load->view('outbreaks/edit', $data);
-		}
-	}
-	public function delete($id)
-	{
+                $table_html .= '<td contenteditable="'.$editable.'" data-field="' . $field_name. '">' . $fv . '</td>';
+            }
+        }
+        
+        // Add action button with color based on is_verified
+		$id=$row['id'];
+        $is_verified = is_verified($table,$id);
 		
+        $button_color = $is_verified ? 'btn-success' : 'btn-danger';
+        $table_html .= '<td>';
+        $table_html .= '<button class="btn ' . $button_color . ' btn-sm verify-button" data-id="' . $row['id'] . '" data-table="' . $table . '">';
+        $table_html .= $is_verified ? 'Verified' : 'Verify';
+        $table_html .= '</button>';
+        $table_html .= '</td>';
+        $table_html .= '</tr>';
+    }
 
-		// Attempt to delete the outbreak
-		$result = $this->outbreaksmodel->delete($id);
+    $table_html .= '</tbody>';
+    $table_html .= '</table>';
 
-		if ($result) {
-			$response = [
-				'success' => true,
-				'message' => 'Outbreak deleted successfully'
-			];
-		} else {
-			$response = [
-				'success' => false,
-				'message' => 'Failed to delete outbreak'
-			];
-		}
+    // Include DataTables initialization script and AJAX handlers
+    // $table_html .= '<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>';
+    // $table_html .= '<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>';
+    // $table_html .= '<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>';
+    // $table_html .= '<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">';
 
-		// Return JSON response
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
-	public function assign_menu_links()
-	{
-		
+    $table_html .= '';
 
-		$outbreak_id = $this->input->post('outbreak_id');
-		$menu_items = $this->input->post('menu');
+    return $table_html;
+}
 
-		// Ensure menu items do not exceed 5 and outbreak ID is valid
-		if (count($menu_items) > 5 || !$outbreak_id) {
-			$response = [
-				'success' => false,
-				'message' => 'Invalid outbreak ID or too many menu items'
-			];
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-			return;
-		}
+public function verify_status($table)
+{
 
-		foreach ($menu_items as $item) {
-			$data = [
-				'outbreak_id' => $outbreak_id,
-				'name' => $item['name'],
-				'title' => $item['name'],
-				'tab' => $item['tab'],
-				'url' => $item['url'],
-			];
+    $id = $this->input->post('id');
+    $row = $this->db->get_where($table, ['id' => $id])->row_array();
+    $new_status = $row['is_verified'] ? 0 : 1;
+    $this->db->where('id', $id)->update($table, ['is_verified' => $new_status]);
+    echo json_encode(["success" => true, "status" => $new_status ? 'Verified' : 'Verify']);
+}
 
-			$this->outbreaksmodel->insert_menu_link($data);
-		}
+public function update_field($table)
+{
+    $id = $this->input->post('id');
+    $field = $this->input->post('field');
+    $value = $this->input->post('value');
+    $this->db->where('id', $id)->update($table, [$field => $value]);
+    echo json_encode(["success" => true]);
+}
 
-		$response = [
-			'success' => true,
-			'message' => 'Menu links assigned successfully'
-		];
+public function save($table)
+{
+    // Load necessary helpers and libraries
+    $this->load->helper(['form', 'security']);
+    $this->load->library('form_validation');
 
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
-	public function get_menu_links($outbreak_id)
-	{
-		$menu_items = $this->outbreaksmodel->get_menu_links_by_outbreak($outbreak_id);
-		$response = [
-			'success' => true,
-			'menu_items' => $menu_items
-		];
 
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
-	public function update_menu_links()
-	{
+    // Retrieve input data
+    $data = $this->input->post();
+    unset($data[$this->security->get_csrf_token_name()]); // Remove CSRF token from data
+
+	//dd($data);
+
+    // Remove ID if present (to prevent overwriting an existing record unintentionally)
+    if (isset($data['id']) && empty($data['id'])) {
+        unset($data['id']);
+    }
+
+    // Sanitize input values
+    foreach ($data as $key => $value) {
+        $data[$key] = $this->security->xss_clean($value);
+    }
+
+ 
+        // Insert new record
+        if ($this->db->insert($table, $data)) {
+            echo json_encode(['success' => true, 'message' => 'Record added successfully.']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to add record.']);
+        }
+    
+}
+
+
 	
-
-		// Get the outbreak ID
-		$outbreak_id = $this->input->post('outbreak_id');
-		if (!$outbreak_id) {
-			$response = [
-				'success' => false,
-				'message' => 'Invalid outbreak ID'
-			];
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-			return;
-		}
-
-		// Get the menu items from the form data
-		$menu_items = $this->input->post('menu');
-		if (empty($menu_items) || !is_array($menu_items)) {
-			$response = [
-				'success' => false,
-				'message' => 'No menu items provided'
-			];
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-			return;
-		}
-
-		// Delete existing menu links for the outbreak before inserting the updated ones
-		$this->outbreaksmodel->delete_menu_links_by_outbreak($outbreak_id);
-
-		// Insert the new menu items
-		foreach ($menu_items as $item) {
-			$data = [
-				'outbreak_id' => $outbreak_id,
-				'name' => $item['name'],
-				'title' => $item['title'],
-				'tab' => $item['tab'],
-				'url' => $item['url'],
-				'icon' => isset($item['icon']) ? $item['icon'] : null,
-				'is_active' => 1 // Default to active; this can be adjusted based on your requirements
-			];
-
-			// Insert each menu link
-			$this->outbreaksmodel->insert_menu_link($data);
-		}
-
-		// Send a success response
-		$response = [
-			'success' => true,
-			'message' => 'Menu items updated successfully'
-		];
-
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
-
-	public function copy_menu_links()
-	{
-		
-
-		// Retrieve source and target outbreak IDs
-		$source_outbreak_id = $this->input->post('source_outbreak_id');
-		$target_outbreak_id = $this->input->post('target_outbreak_id');
-
-		// Check if both IDs are valid
-		if (!$source_outbreak_id || !$target_outbreak_id) {
-			$response = [
-				'success' => false,
-				'message' => 'Invalid outbreak IDs'
-			];
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-			return;
-		}
-
-		// Fetch menu links for the source outbreak
-		$menu_links = $this->outbreaksmodel->get_menu_links_by_outbreak($source_outbreak_id);
-
-		// Check if there are menu links to copy
-		if (empty($menu_links)) {
-			$response = [
-				'success' => false,
-				'message' => 'No menu items to copy from the selected outbreak'
-			];
-			$this->output
-				->set_content_type('application/json')
-				->set_output(json_encode($response));
-			return;
-		}
-
-		// Copy each menu link to the target outbreak as new entries
-		foreach ($menu_links as $menu_link) {
-			$data = [
-				'outbreak_id' => $target_outbreak_id,
-				'name' => $menu_link->name,
-				'title' => $menu_link->title,
-				'tab' => $menu_link->tab,
-				'url' => $menu_link->url,
-				'icon' => $menu_link->icon,
-				'order' => $menu_link->order,
-				'is_active' => $menu_link->is_active
-			];
-
-			// Insert each copied menu link into the target outbreak
-			$this->outbreaksmodel->insert_menu_link($data);
-		}
-
-		// Send a success response
-		$response = [
-			'success' => true,
-			'message' => 'Menu items copied successfully'
-		];
-
-		$this->output
-			->set_content_type('application/json')
-			->set_output(json_encode($response));
-	}
-
-
-
-
 
 
 }

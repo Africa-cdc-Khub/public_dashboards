@@ -1,7 +1,7 @@
 <?php
 
-$usergroups = Modules::run("permissions/getUserGroups");
-$rccs = Modules::run("geoareas/getrcc");
+$usergroups = $this->db->get('user_groups')->result();
+
 
 
 ?>
@@ -54,44 +54,44 @@ $rccs = Modules::run("geoareas/getrcc");
           <div class="col-sm-4">
             <!-- textarea -->
             <div class="form-group">
-              <label>Username</label>
+              <label>Username : Default Password (staffppa@2023)</label>
               <input type="text" required name="username" autocomplete="off" class="form-control" placeholder="Username" required />
             </div>
           </div>
           <div class="col-sm-4">
             <!-- textarea -->
             <div class="form-group">
-              <label>Default Password</label>
-              <input type="text" required name="password" value="<?php echo setting()->default_password; ?> " class="form-control" readonly />
+              <label>Outbreak</label>
+            
+         
+              <select name="outbreak_id" style="width:100%;" class="role form-control select2" required>
+                <option value="" disabled selected>Select Outbreak</option>
+                <?php 
+                $rows = $this->db->get('outbreak_events')->result();
+                foreach ($rows as $row) :
+                ?>
+                  <option value="<?php echo $row->id; ?>"><?php echo $row->outbreak_name; ?>
+
+                  </option>
+                <?php endforeach; ?>
+              </select>
+           
+          
+              <input type="hidden" required name="password" value="<?php echo setting()->default_password; ?> " class="form-control" readonly />
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
-              <label>Email</label>
+              <label>Email : Default Password (staffppa@2023)</label>
               <input type="email" required name="email" class="form-control" placeholder="Email" required />
             </div>
           </div>
-          <div class="col-sm-4">
-            <div class="form-group">
-              <label>RCC</label>
-              <select onChange="getCountries($(this).val());" name="access1[]" class="form-control select2 sregion" style="width:100%;" multiple>
-                <?php foreach ($rccs as $rcc) :
-                ?>
-                  <option value="<?php echo $rcc->id; ?>"><?php echo $rcc->region_name; ?></option>
-                <?php endforeach; ?>
-              </select>
-
-            </div>
-          </div>
+         
 
           <div class="col-sm-4">
             <div class="form-group">
-              <label>Country</label>
-              <select name="access2[]" class="form-control select2 scountry" style="width:100%;" multiple>
-
-
-              </select>
-
+              <label>Organisation</label>
+              <input type="text" name="organization_name" class="form-control" placeholder="organisation" style="width:100%;" >
 
             </div>
           </div>
@@ -147,8 +147,8 @@ $rccs = Modules::run("geoareas/getrcc");
               <th>Name</th>
               <th>Username</th>
               <th>User Group</th>
-              <th>RCC</th>
-              <th>Country</th>
+              <!-- <th>RCC</th> -->
+              <th>Outbreaks</th>
               <th>Actions</th>
 
 
@@ -163,25 +163,24 @@ $rccs = Modules::run("geoareas/getrcc");
 
               <tr>
                 <td><?php echo $no; ?>. </td>
-                <td><?php echo $user->user_id; ?></td>
+                <td><?php echo $user->name; ?></td>
                 <td><?php echo $user->username; ?></td>
                 <td><?php echo $user->group_name; ?></td>
-                <td><?php echo @access_level1($user->user_id); ?></td>
-                <td><?php echo @access_level2($user->user_id); ?></td>
-                <td><a data-toggle="modal" data-target="#user<?php echo $user->user_id; ?>" href="#">Edit</a>
+                <td><?php $id = $user->outbreak_id; echo get_outbreak($id)->outbreak_name;?></td>
+                <td><a data-toggle="modal" data-target="#user<?php echo $user->id; ?>" href="#">Edit</a>
 
                   <?php if ($user->status == 1) { ?>
 
-                    <a data-toggle="modal" data-target="#block<?php echo $user->user_id; ?>" href="#">Block</a>
+                    <a data-toggle="modal" data-target="#block<?php echo $user->id; ?>" href="#">Block</a>
                   <?php } else { ?>
 
-                    <a data-toggle="modal" data-target="#unblock<?php echo $user->user_id; ?>" href="#">Activate</a>
+                    <a data-toggle="modal" data-target="#unblock<?php echo $user->id; ?>" href="#">Activate</a>
 
                   <?php } ?>
 
 
 
-                  <a data-toggle="modal" data-target="#reset<?php echo $user->user_id; ?>" href="#">Reset</a>
+                  <a data-toggle="modal" data-target="#reset<?php echo $user->id; ?>" href="#">Reset</a>
 
                 </td>
 

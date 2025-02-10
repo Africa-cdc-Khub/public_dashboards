@@ -31,7 +31,8 @@
             </a>
             <p class="card-text mb-3 justify-content-center">
               <i class="fas fa-th text-info"></i>
-              Description: <?= htmlspecialchars($event->description) ?>
+              Description: <?php echo htmlspecialchars_decode($event->description); ?>
+
             </p>
           </div>
         </div>

@@ -32,7 +32,7 @@
 						</svg></a>
 				</div>
 			</div><!-- Full-screen closed -->
-			<div class="dropdown  nav-item main-header-message ">
+			<!-- <div class="dropdown  nav-item main-header-message ">
 				<a class="new nav-link menu-icons" href="#"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
 						<polyline points="22,6 12,13 2,6"></polyline>
@@ -113,8 +113,8 @@
 						<a href="text-center">VIEW ALL</a>
 					</div>
 				</div>
-			</div><!-- Main-header-message closed -->
-			<div class="dropdown nav-item main-header-notification">
+			</div> -->
+			<!-- <div class="dropdown nav-item main-header-notification">
 				<a class="new nav-link menu-icons" href="#"><svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
 						<path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
@@ -169,7 +169,7 @@
 						<a href="">VIEW ALL</a>
 					</div>
 				</div>
-			</div><!-- Notification closed -->
+			</div> -->
 			
 			<div class="dropdown nav-item main-header-notification">
 			<a class="profile-user mb-1" href="" style="background:#FFF; border-radius:8px; font-size:12px;"><i class="fa fa-user"></i> <?=$this->session->userdata('name');?></a>
