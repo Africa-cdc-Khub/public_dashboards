@@ -214,7 +214,7 @@ public function generate_editable_table($table, $rows)
     foreach ($schema as $field) {
         $field_name = $field['Field'];
 		if (!in_array($field_name, $excluded_columns)) {
-			$table_html .= '<th>' . ucfirst(str_replace('ID', '', str_replace('_', ' ', $field_name))) . '</th>';
+			$table_html .= '<th>' . ucfirst(str_replace('id', '', str_replace('_', ' ', $field_name))) . '</th>';
 
         }
     }
