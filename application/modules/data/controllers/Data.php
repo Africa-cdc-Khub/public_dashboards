@@ -90,9 +90,9 @@ class Data extends MX_Controller
 	
 				$input_type = 'select';
 				$enum_values = array_column($distinct_values, $field_name);
-			} elseif ($field_name == 'member_state') {
+			} elseif ($field_name == 'member_state'||$field_name=='member_state_id') {
 				// Fetch distinct values for the 'member_state' field
-				$distinct_query = $this->db->query("SELECT DISTINCT `$field_name` FROM `member_states` ORDER BY $field_name ASC");
+				$distinct_query = $this->db->query("SELECT DISTINCT member_state FROM `member_states` ORDER BY $field_name ASC");
 				$distinct_values = $distinct_query->result_array();
 	
 				$input_type = 'select';
@@ -107,6 +107,27 @@ class Data extends MX_Controller
 	
 				$input_type = 'select';
 				$enum_values = array_column($distinct_values, 'id');
+				$readonly = "readonly";
+			}
+			elseif ($field_name == 'vaccine') {
+				// Fetch distinct values for the 'member_state' field
+				// $outbreak_id = $this->session->userdata('outbreak_id');
+				//dd($outbreak_id);
+				$distinct_query = $this->db->query("SELECT id, 
+													CONCAT(vaccine_name, ' - ', disease) AS vaccine_name, 
+													manufacturer, 
+													required_doses, 
+													storage_temperature, 
+													efficacy_percentage, 
+													approval_status, 
+													created_at, 
+													updated_at
+												FROM vaccine_types WHERE is_verified=1 order by disease ASC
+												");
+				$distinct_values = $distinct_query->result_array();
+	
+				$input_type = 'select';
+				$enum_values = array_column($distinct_values, 'vaccine_name');
 				$readonly = "readonly";
 			}
 			elseif ($field_name == 'is_verified') {
@@ -130,6 +151,8 @@ class Data extends MX_Controller
 				$input_type = 'number';
 			} elseif (preg_match('/text/', $field_type)) {
 				$input_type = 'textarea';
+		    } elseif (preg_match('/date/', $field_type)) {
+				$input_type = 'date';
 			} elseif (preg_match('/varchar|char/', $field_type)) {
 				$input_type = 'text';
 			} elseif (preg_match('/enum\((.*)\)/', $field_type, $matches)) {
@@ -143,7 +166,7 @@ class Data extends MX_Controller
 			// Open column
 			$form_html .= '<div class="col-md-' . $col_width . '">';
 			$form_html .= '<div class="form-group">';
-			$form_html .= '<label for="' . $field_name . '">' . ucfirst(str_replace('_', ' ', $field_name)).$field_extra. '</label>';
+			$form_html .= '<label for="' . $field_name . '">' . ucfirst(str_replace('id','',str_replace('_', ' ', $field_name))).$field_extra. '</label>';
 			
 			// Generate input field
 			if ($input_type == 'textarea') {

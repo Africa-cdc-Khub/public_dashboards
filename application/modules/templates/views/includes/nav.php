@@ -17,6 +17,13 @@
 						
 					</ul>
 				</li>
+				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Vaccination<i class="fe fe-chevron-down horizontal-icon"></i></a>
+					<ul class="sub-menu">
+						<li aria-haspopup="true"><a href=" <?php echo base_url() ?>data/form/outbreak_vaccination/2">Vaccination Data</a></li>
+						<li aria-haspopup="true"><a href="<?php echo base_url() ?>data/form/vaccine_types/2">Vaccine Types</a></li>
+						
+					</ul>
+				</li>
 				<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fas fa-files"></i>Programmatic Response<i class="fe fe-chevron-down horizontal-icon"></i></a>
 					<ul class="sub-menu">
 						<li aria-haspopup="true"><a href="<?php echo base_url(); ?>data/form/response_plan_indicators/2" class="slide-item">Response Plan Indicators</a></li>
