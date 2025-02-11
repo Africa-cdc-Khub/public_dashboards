@@ -128,7 +128,7 @@ class Data extends MX_Controller
 	
 				$input_type = 'select';
 				$enum_values = array_column($distinct_values, 'vaccine_name');
-				$readonly = "readonly";
+			
 			}
 			elseif ($field_name == 'is_verified') {
 				$input_type = 'select';

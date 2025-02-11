@@ -43,7 +43,7 @@ class Auth extends MX_Controller
       // Retrieve additional user access details
       $user['permissions'] = $this->auth_mdl->user_permissions($user['role']);
       $user['is_admin']    = true;
-      $user['outbreak_id']=1;
+      // $user['outbreak_id']=1;
   
       // Set user session data
       $this->session->set_userdata($user);
