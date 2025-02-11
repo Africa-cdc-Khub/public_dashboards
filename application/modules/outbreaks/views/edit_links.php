@@ -7,7 +7,7 @@
             <div class="card-body" style="background: #f8f9fa;">
         <!-- Outbreak Selection -->
         <div class="form-group">
-            <label for="outbreakSelect">Select Outbreak</label>
+            <label for="outbreakSelect">Copy Menu to: (Select Outbreak)</label>
             <select class="form-control" id="outbreakSelect" name="outbreak_id">
                 <option value="" disabled selected>Select an outbreak</option>
                 <?php foreach ($outbreaks as $outbreak): ?>
@@ -41,7 +41,7 @@
 
         <!-- Copy menu items from another outbreak -->
         <div class="mt-5">
-            <h3>Copy Menu Items from Another Outbreak</h3>
+            <h3>Copy Menu from (Select Outbreak)</h3>
             <div class="form-group">
                 <label for="copyOutbreakSelect">Select Outbreak to Copy From</label>
                 <select class="form-control" id="copyOutbreakSelect" name="copy_outbreak_id">
