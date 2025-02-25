@@ -233,17 +233,11 @@ class Auth_mdl extends CI_Model
 	}
 	public function access_level1($user_id)
 	{
-		$this->db->where("user_id", $user_id);
-		$this->db->join("regions", "user_access_level1.access_id=regions.id");
-		$query = $this->db->get('user_access_level1');
-		return $query->result_array();
+	
 	}
 	public function access_level2($user_id)
 	{
-		$this->db->where("user_id", $user_id);
-		$this->db->join("country", "user_access_level2.access_id=country.id");
-		$query = $this->db->get('user_access_level2');
-		return $query->result_array();
+	
 	}
 
 	public function user_permissions($role)
